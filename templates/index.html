@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Calculator</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $.get('/get-unique-years', function(data) {
+            data.forEach(function(year) {
+                $('#year').append($('<option>', {
+                    value: year,
+                    text: year
+                }));
+            });
+        });
+
+        $.get('/get-unique-months', function(data) {
+            data.forEach(function(month) {
+                $('#month').append($('<option>', {
+                    value: month,
+                    text: month
+                }));
+            });
+        });
+    });
+</script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Expense Calculator</h1>
+        <form action="/calculate-expenses" method="get">
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="department">Department:</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="department" name="department">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="year">Year:</label>
+                </div>
+                <div class="input-container">
+                    <select id="year" name="year">
+                        <option value="">All Years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-container">
+                    <label for="month">Month:</label>
+                </div>
+                <div class="input-container">
+                    <select id="month" name="month">
+                        <option value="">All Months</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
