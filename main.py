@@ -74,16 +74,14 @@ def parse_input(arguments):
 
 
 def print_total_expenses(total_expenses, department, year=None, time=None):
-    if year:
-        if time:
-            if time.isdigit():
-                quarter_names = ["First", "Second", "Third", "Fourth"]
-                print(f"Total expenses for department '{department}' in {quarter_names[int(time)-1]} "
-                      f"quarter of {year}: {total_expenses}")
-            else:
-                print(f"Total expenses for department '{department}' in {time} of {year}: {total_expenses}")
-        else:
-            print(f"Total expenses for department '{department}' in {year}: {total_expenses}")
+    if year and time and time.isdigit():
+        quarter_names = ["First", "Second", "Third", "Fourth"]
+        print(f"Total expenses for department '{department}' in {quarter_names[int(time)-1]} "
+              f"quarter of {year}: {total_expenses}")
+    elif year and time:
+        print(f"Total expenses for department '{department}' in {time} of {year}: {total_expenses}")
+    elif year:
+        print(f"Total expenses for department '{department}' in {year}: {total_expenses}")
     else:
         print(f"Total expenses for department '{department}': {total_expenses}")
 
