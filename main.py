@@ -27,17 +27,18 @@ def extract_unique_years(input_stream):
     for row in reader:
         year = row['Year']
         unique_years.add(year)
-    return unique_years
+    return sorted(unique_years)
 
 
 def extract_unique_months(input_stream):
+    all_month_names = calendar.month_abbr[1:]
     unique_months = set()
     reader = csv.DictReader(input_stream, delimiter=';')
     for row in reader:
-        for month_name in calendar.month_abbr[1:]:
-            if row[month_name]:
+        for month_name in all_month_names:
+            if row.get(month_name):
                 unique_months.add(month_name)
-    return unique_months
+    return sorted(unique_months, key=lambda x: all_month_names.index(x))
 
 
 def _is_matching_department(dept, department):
